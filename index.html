@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- PyScript CSS -->
+        <link rel="stylesheet" href="https://pyscript.net/releases/2024.1.1/core.css">
+        <!-- This script tag bootstraps PyScript -->
+        <script type="module" src="https://pyscript.net/releases/2024.1.1/core.js"></script>
+    <!-- BOOTSTRAP -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- google fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+</head>
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #AEE7FF, #C5F5E0, #FFF2A6);
+            min-height: 100vh;
+            font-family: 'Nunito', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 15px;
+        }
+
+        /* main card */
+        .main-card {
+            background: white;
+            border: 4px solid #75D5F4;
+            border-radius: 30px;
+            overflow: hidden;
+            max-width: 580px;
+            margin: auto;
+            box-shadow: 0 8px 0 #65BBDD, 0 15px 30px rgba(35, 115, 150, 0.15);
+        }
+
+        /* header */
+        .card-header {
+            background: linear-gradient(135deg, #55C5F0, #78DCCB);
+            padding: 35px 20px;
+            text-align: center;
+            border-bottom: 4px solid #FFE16B;
+        }
+
+        .science-icon {
+            font-size: 60px;
+            margin-bottom: 10px;
+        }
+
+        .card-header h2 {
+            font-family: 'Fredoka', sans-serif;
+            font-size: 34px;
+            font-weight: 700;
+            color: #155A91;
+        }
+
+        .card-header p {
+            font-size: 15px;
+            font-weight: 700;
+            color: #267C91;
+        }
+
+        /* card content */
+        .card-body {
+            padding: 30px;
+            text-align: center;
+        }
+
+        /* instructions */
+        .instructions {
+            background: #DDF6FF;
+            border: 2px solid #8DDAF5;
+            border-radius: 20px;
+            padding: 20px;
+            color: #236B91;
+            font-size: 14px;
+            line-height: 1.8;
+            margin-bottom: 25px;
+        }
+
+        .instructions i {
+            color: #EFC83D;
+            font-size: 23px;
+        }
+
+        /* input */
+        .form-label {
+            color: #258DB9;
+            font-weight: 900;
+            display: block;
+            text-align: center;
+        }
+
+        .form-control {
+            border: 2px solid #8DDAF5;
+            background: #F5FCFF;
+            border-radius: 15px;
+            padding: 13px;
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+        }
+
+        .form-control:focus {
+            border-color: #65CEAE;
+            box-shadow: 0 0 0 3px rgba(101, 206, 174, 0.2);
+        }
+
+        .form-control::placeholder {
+            color: #91B9C8;
+        }
+
+        /* button */
+        .btn-checker {
+            background: #91E2A4;
+            color: #246B60;
+            border: 2px solid #65C78B;
+            border-radius: 15px;
+            padding: 13px;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            box-shadow: 0 5px 0 #50A977;
+            transition: 0.2s;
+        }
+
+        .btn-checker:hover {
+            background: #FFE16B;
+            color: #236B91;
+            border-color: #EFC83D;
+            transform: translateY(-2px);
+        }
+
+        /* result */
+        .result-title {
+            color: #258DB9;
+            font-family: 'Fredoka', sans-serif;
+            font-size: 23px;
+        }
+
+        #result {
+            min-height: 140px;
+            background: #E4F9ED;
+            border: 2px solid #8EDDB6;
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            color: #347F70;
+            font-size: 14px;
+            line-height: 2;
+        }
+
+        /* result details */
+        .result-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .detail-item {
+            width: 100%;
+            max-width: 330px;
+            background: white;
+            border: 1px solid #B8EBD0;
+            border-radius: 12px;
+            padding: 8px;
+        }
+
+        .detail-item strong {
+            color: #258DB9;
+        }
+
+        /* footer */
+        .card-footer {
+            background: #FFF9D9;
+            border-top: 2px solid #FFE16B;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .footer-text {
+            color: #397D91;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        /* mobile */
+        @media (max-width: 576px) {
+            .card-body {
+                padding: 22px 18px;
+            }
+
+            .card-header h2 {
+                font-size: 28px;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <div class="row justify-content-center">
+
+            <div class="col-lg-7 col-md-9">
+
+                <div class="card main-card">
+
+                    <!-- website heading -->
+                    <div class="card-header">
+
+                        <div class="science-icon">
+                            🧪
+                        </div>
+
+                        <h2>
+                            Non-Metal Elements
+                        </h2>
+
+                        <p class="mb-0">
+                            Periodic Table Information Finder
+                        </p>
+
+                    </div>
+
+                    <div class="card-body">
+
+                        <!-- instructions -->
+                        <div class="instructions">
+
+                            <i class="bi bi-lightbulb-fill"></i>
+
+                            <strong>Instructions:</strong>
+
+                            <p class="mb-1 mt-2">
+                                Enter the symbol of a non-metal element
+                                to find its information.
+                            </p>
+
+                            <small>
+                                Examples: H, O, Cl, Ne, Xe
+                            </small>
+
+                        </div>
+
+                        <!-- element input -->
+                        <form>
+
+                            <div class="mb-3">
+
+                                <label class="form-label">
+                                    <i class="bi bi-search"></i>
+                                    Element Symbol
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="element_name"
+                                    class="form-control form-control-lg"
+                                    placeholder="Enter element symbol..."
+                                >
+
+                            </div>
+
+                            <!-- search button -->
+                            <div class="d-grid">
+
+                                <input
+                                    type="button"
+                                    py-click="element_checker"
+                                    value="Check Element ✨"
+                                    class="btn btn-checker btn-lg"
+                                >
+
+                            </div>
+
+                        </form>
+
+                        <hr class="my-4">
+
+                        <!-- results -->
+                        <h5 class="result-title mb-3">
+
+                            <i class="bi bi-stars"></i>
+                            Element Information
+                            <i class="bi bi-stars"></i>
+
+                        </h5>
+
+                        <div id="result">
+
+                            <div class="text-center">
+                                <div style="font-size: 35px;">🔬</div>
+
+                                <p class="mb-0">
+                                    Your element details will appear here!
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- footer -->
+                    <div class="card-footer">
+
+                        <div class="footer-text">
+                            ✨ Nicole Manalang | 10-Emerald | 2026-2027 ✨
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <py-script src="main.py"></py-script>
+</body>
+</html>
